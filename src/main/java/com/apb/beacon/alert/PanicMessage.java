@@ -2,6 +2,7 @@ package com.apb.beacon.alert;
 
 import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 
 import com.apb.beacon.location.LocationFormatter;
 import com.apb.beacon.model.SMSSettings;
@@ -10,7 +11,7 @@ import com.apb.beacon.sms.SMSAdapter;
 import static android.telephony.SmsMessage.MAX_USER_DATA_SEPTETS;
 
 public class PanicMessage {
-    public static final int TWITTER_MAX_LENGTH = 140;
+//    public static final int TWITTER_MAX_LENGTH = 140;
     private Context context;
     private Location location;
 
@@ -29,7 +30,8 @@ public class PanicMessage {
         String message = getSMSText(smsSettings.trimmedMessage());
 
         for (String phoneNumber : smsSettings.validPhoneNumbers()) {
-            smsAdapter.sendSMS(phoneNumber, message);
+            Log.e(">>>><<<<", "pn = " + phoneNumber + " & msg = " + message);
+//            smsAdapter.sendSMS(phoneNumber, message);
         }
     }
 

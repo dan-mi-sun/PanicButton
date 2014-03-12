@@ -3,6 +3,7 @@ package com.apb.beacon.location;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 
 import static android.location.LocationManager.NETWORK_PROVIDER;
 
@@ -10,12 +11,14 @@ public class CurrentLocationProvider extends LocationListenerAdapter {
     private Location currentLocation;
 
     public CurrentLocationProvider(Context context) {
+        Log.e(">>>>>>>>", "CurrentLocationProvider constructor");
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestSingleUpdate(NETWORK_PROVIDER, this, context.getMainLooper());
     }
 
     @Override
     public void onLocationChanged(Location location) {
+        Log.e(">>>>>>>", "onLocationChanged -> CurrentLocationProvider");
         currentLocation = location;
     }
 

@@ -18,6 +18,7 @@ public class LocationUpdateReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.e(">>>>>", "LocationUpdateReceiver onReceive");
         if(intent.getAction().equals(Intents.LOCATION_UPDATE_ACTION)) {
             this.context = context;
             processNewLocation(intent);

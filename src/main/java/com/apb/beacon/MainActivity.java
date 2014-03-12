@@ -1,9 +1,11 @@
 package com.apb.beacon;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apb.beacon.data.PBDatabase;
+import com.apb.beacon.location.LocationFormatter;
 import com.apb.beacon.model.Page;
+import com.apb.beacon.model.SMSSettings;
 import com.apb.beacon.sms.SetupContactsFragment;
 import com.apb.beacon.sms.SetupMessageFragment;
 import com.apb.beacon.wizard.LanguageSettingsFragment;
@@ -59,6 +63,7 @@ public class MainActivity extends FragmentActivity {
             Log.e(">>>>>>", "page = null");
             Toast.makeText(this, "Still to be implemented.", Toast.LENGTH_SHORT).show();
             finish();
+            return;
         } else {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -92,6 +97,43 @@ public class MainActivity extends FragmentActivity {
             fragmentTransaction.commit();
         }
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        if(currentPage.getId().equals("settings") && AlertStatus.ACTIVE.equals(getPanicAlert().getAlertStatus())){
+        if(currentPage.getId().equals("settings")){
+            Toast.makeText(MainActivity.this, "This is Settings.", Toast.LENGTH_SHORT).show();
+
+            Location currentLocation = ApplicationSettings.getCurrentBestLocation(MainActivity.this);
+            String locationString = new LocationFormatter(currentLocation).format();
+            locationString = "location = " + (locationString.equals("") ? "can't be retrieved.\n" : locationString);
+
+                    SMSSettings smsSettings = SMSSettings.retrieve(MainActivity.this);
+            String msg = "Messages-" + smsSettings.trimmedMessage() + "\n";
+
+            StringBuilder sb = new StringBuilder("Phone Number(s)-\n");
+            for (String phoneNumber : smsSettings.validPhoneNumbers()) {
+                sb.append(phoneNumber + "\n");
+            }
+
+            String dialogBody = locationString + msg + sb.toString();
+            alert(dialogBody);
+        }
+    }
+
+
+
+
+    void alert(String message) {
+        AlertDialog.Builder bld = new AlertDialog.Builder(MainActivity.this);
+        bld.setMessage(message);
+        bld.setCancelable(false);
+        bld.setNeutralButton("OK", null);
+        bld.create().show();
+    }
+
 
     @Override
     protected void onPause() {

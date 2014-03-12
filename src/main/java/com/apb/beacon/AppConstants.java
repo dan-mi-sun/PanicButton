@@ -4,12 +4,15 @@ public class AppConstants {
     public static final int HAPTIC_FEEDBACK_DURATION = 3000;
 
     public static final float GPS_MIN_DISTANCE = 0;
-    public static final long GPS_MIN_TIME = 1000 * 60 * 2;
+//    public static final long GPS_MIN_TIME = 1000 * 60 * 2;
+public static final long GPS_MIN_TIME = 1000 * 30;
 
     public static final float NETWORK_MIN_DISTANCE = 0;
-    public static final long NETWORK_MIN_TIME = 1000 * 60 * 2;
+//    public static final long NETWORK_MIN_TIME = 1000 * 60 * 2;
+    public static final long NETWORK_MIN_TIME = 1000 * 30;
 
-    public static final long ALERT_FREQUENCY = 1000 * 60 * 5;
+//    public static final long ALERT_FREQUENCY = 1000 * 60 * 5;
+    public static final long ALERT_FREQUENCY = 1000 * 60 * 1;
 
     public static final int WARNING_TRAINING_MESSAGE_MINIMUM_CHARACTER = 30;
 
