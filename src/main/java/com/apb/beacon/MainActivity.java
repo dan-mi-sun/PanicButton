@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apb.beacon.alert.AlertStatus;
+import com.apb.beacon.alert.PanicAlert;
 import com.apb.beacon.data.PBDatabase;
 import com.apb.beacon.location.LocationFormatter;
 import com.apb.beacon.model.Page;
@@ -102,8 +104,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        if(currentPage.getId().equals("settings") && AlertStatus.ACTIVE.equals(getPanicAlert().getAlertStatus())){
-        if(currentPage.getId().equals("settings")){
+        if(currentPage.getId().equals("settings") && AlertStatus.ACTIVE.equals(getPanicAlert().getAlertStatus())){
             Toast.makeText(MainActivity.this, "This is Settings.", Toast.LENGTH_SHORT).show();
 
             Location currentLocation = ApplicationSettings.getCurrentBestLocation(MainActivity.this);
@@ -123,7 +124,9 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-
+    PanicAlert getPanicAlert() {
+        return new PanicAlert(this);
+    }
 
 
     void alert(String message) {

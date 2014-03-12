@@ -2,7 +2,6 @@ package com.apb.beacon.alert;
 
 import android.content.Context;
 import android.location.Location;
-import android.util.Log;
 
 import com.apb.beacon.location.LocationFormatter;
 import com.apb.beacon.model.SMSSettings;
@@ -30,8 +29,8 @@ public class PanicMessage {
         String message = getSMSText(smsSettings.trimmedMessage());
 
         for (String phoneNumber : smsSettings.validPhoneNumbers()) {
-            Log.e(">>>><<<<", "pn = " + phoneNumber + " & msg = " + message);
-//            smsAdapter.sendSMS(phoneNumber, message);
+//            Log.e(">>>><<<<", "pn = " + phoneNumber + " & msg = " + message);
+            smsAdapter.sendSMS(phoneNumber, message);
         }
     }
 
