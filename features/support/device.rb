@@ -1,4 +1,4 @@
-class Device
+class CustomOps
   extend Calabash::Android::Operations
 
   def self.adb_command(command)

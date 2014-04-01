@@ -1,7 +1,9 @@
 from com.android.monkeyrunner import MonkeyRunner, MonkeyDevice
 import commands
 import sys
-device = MonkeyRunner.waitForConnection()
+import os
+
+device = MonkeyRunner.waitForConnection(15, os.environ['ADB_DEVICE_ARG'])
 
 print "Unlocking"
 

@@ -17,12 +17,12 @@ Feature: Hardware Alarm Test in the Wizard
       And I wait
       And I press "Setup Alarm"
       And I wait
-      And I press "Learn"
-      And I wait
-      Then I see "Try Now! Repeatedly press the power button fast until you feel a vibration."
+      Then I see "Learn"
 
   @current @PB-721
   Scenario: Triggering Alert with Hardware Button 
-      And I press power button 5 times
+    Given I press power button 5 times
+      And I wait for 10 seconds
       And I unlock device
+      And I wait for 10 seconds
       Then I see "Well done!"

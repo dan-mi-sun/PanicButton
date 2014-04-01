@@ -15,19 +15,19 @@ Then /^I enter "(.*?)" into contact field (\d+)$/ do |text_to_enter, index|
 end
 
 Then /^I press back button$/ do
-  Device.adb_command("shell input keyevent 4")
+  CustomOps.adb_command("shell input keyevent 4")
 end
 
 Then /^I press home button$/ do
-  Device.adb_command("shell input keyevent 3")
+  CustomOps.adb_command("shell input keyevent 3")
 end
 
 And(/^I start application$/) do
-  Device.adb_command("shell am start -n com.apb.beacon/.HomeActivity")
+  CustomOps.adb_command("shell am start -n com.apb.beacon/.HomeActivity")
 end
 
 And(/^I clear log$/) do
-  Device.adb_command("logcat -c")
+  CustomOps.adb_command("logcat -c")
 end
 
 And(/^I check sms text contains "(.*?)"$/) do |sms_text|
@@ -44,36 +44,36 @@ And(/^I check sms text contains "(.*?)"$/) do |sms_text|
 end
 
 Then /^I turn off wifi$/ do
-  Device.install_development_app
-  Device.open_dev_app_connection_settings
-  Device.adb_command("shell input keyevent 61")
-  Device.adb_command("shell input keyevent 23")
+  CustomOps.install_development_app
+  CustomOps.open_dev_app_connection_settings
+  CustomOps.adb_command("shell input keyevent 61")
+  CustomOps.adb_command("shell input keyevent 23")
 end
 
 Then /^I switch gps$/ do
-  Device.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{Device.get_more_dir}/gpsmonkey.py")
+  CustomOps.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{CustomOps.get_more_dir}/gpsmonkey.py")
 end
 
 Then /^I turn on wifi$/ do
-  Device.install_development_app
-  Device.open_dev_app_connection_settings
-  Device.adb_command("shell input keyevent 23")
+  CustomOps.install_development_app
+  CustomOps.open_dev_app_connection_settings
+  CustomOps.adb_command("shell input keyevent 23")
 end
 
 And(/^I press power button 5 times$/) do
-  log ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{Device.get_more_dir}/presspowr5times.py"
-  Device.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{Device.get_more_dir}/presspowr5times.py")
+  log ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{CustomOps.get_more_dir}/presspowr5times.py"
+  CustomOps.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner -plugin features/support/more/androidviewclient-3.2.0.jar #{CustomOps.get_more_dir}/presspowr5times.py")
 end
 
 And(/^I unlock device$/) do
-  Device.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{Device.get_more_dir}/unlockscreen.py")
+  CustomOps.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{CustomOps.get_more_dir}/unlockscreen.py")
 end
 
 
 And(/^I click 5 times fast on calculation$/) do
-  Device.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{Device.get_more_dir}/clikingoncalculation.py")
+  CustomOps.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{CustomOps.get_more_dir}/clikingoncalculation.py")
 end
 
 And(/^I long press custom$/) do
-  Device.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{Device.get_more_dir}/longpress.py")
+  CustomOps.cmd_command(ENV["ANDROID_HOME"] + "/tools/monkeyrunner #{CustomOps.get_more_dir}/longpress.py")
 end
